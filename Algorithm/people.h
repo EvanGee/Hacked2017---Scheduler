@@ -5,10 +5,10 @@
 
 struct person {
 
-	char name[1024];
+	char *name;
 	int level;
-	double start_times[7];
-	double end_times[7];
+	float start_times[7];
+	float end_times[7];
 	double max_hours;
 	int allocated_hours;
 };

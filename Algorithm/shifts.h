@@ -9,7 +9,7 @@
 
 struct Shift{
 	int id;
-	char day[3];
+	char *day;
 	float start;
 	float end;
 	int n_constraints;

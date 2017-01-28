@@ -21,31 +21,40 @@ void read_and_parse(char *filename, struct person *people)
 
 	while (fgets(line, MAX_LINE, fp)) {
 
-		strtok(line, "\n");
-        /*
-		struct person p = {
-			.name =      strtok(line, " "),
-			.level =     atoi(strtok(NULL, " ")),
-			.max_hours = atof(strtok(NULL, " ")),
-			.hours_allocated = 0
-		};
-		people[insert] = p;
-        */
-
-        strcpy(people[insert].name, strtok(line, " "));
-        people[insert].level = atoi(strtok(NULL, " "));
-        people[insert].max_hours = atof(strtok(NULL, " "));
-	people[insert].allocated_hours = 0;
-	
-	char availability[MAX_LINE];
-	for (int i = 0; i < DAYS_OF_WEEK; i++) {
-		fgets(availability, MAX_LINE, fp);
-		strtok(availability, "\n");
-		people[insert].start_times[i] = atof(strtok(availability, " "));
-		people[insert].end_times[i] = atof(strtok(NULL, " "));
-	}
-	people[++insert].name[0] = '\0';
-	traverse_people(people);
+		/*
+		  struct person p = {
+		  .name =      strtok(line, " "),
+		  .level =     atoi(strtok(NULL, " ")),
+		  .max_hours = atof(strtok(NULL, " ")),
+		  .hours_allocated = 0
+		  };
+		  people[insert] = p;
+		*/
+		if (!line[0])
+			break;
+	       
+		printf("%s\n", line);
+		char *name = strtok(line, " ");
+		people[insert].name = calloc(1, strlen(name) + 1);
+		
+		strcpy(people[insert].name, name);
+		people[insert].level = atoi(strtok(NULL, " "));
+		people[insert].max_hours = atof(strtok(NULL, "\n"));
+		people[insert].allocated_hours = 0;
+		
+		char availability[MAX_LINE];
+		for (int i = 0; i < DAYS_OF_WEEK; i++) {
+			if (fgets(availability, MAX_LINE, fp)) {
+				people[insert].start_times[i] = atof(strtok(availability, " "));
+				people[insert].end_times[i] = atof(strtok(NULL, "\n"));
+			}
+			else
+				break;
+		}
+		//people[++insert].name[0] = '\0';
+#ifdef DEBUG 
+		traverse_people(people);
+#endif
 	}
 }
 
