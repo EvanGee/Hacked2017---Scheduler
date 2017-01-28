@@ -1,3 +1,6 @@
+#ifndef PEOPLE_H
+#define PEOPLE_H
+
 #define MAX_PEOPLE    1024
 
 struct person {
@@ -15,3 +18,5 @@ struct person {
 void traverse_people(struct person *people);
 
 void read_and_parse(char *filename, struct person *people);
+
+#endif

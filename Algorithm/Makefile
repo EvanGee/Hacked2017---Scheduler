@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS= -std=c99 -g -Wall -pedantic
+CFLAGS= -std=c99 -g -Wall -pedantic -DDOMAIN="struct person" -DCONSTRAINT="struct Shift" -DVARIABLE="struct Shift"
 
 
 scheduler: people.o sort.o shifts.o main.c

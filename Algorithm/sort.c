@@ -4,13 +4,7 @@
 #include <stdbool.h>
 
 #include "sort.h"
-#include "people.h"
 //#include "shifts.h"
-
-#define CAST_TO(type_t, member) ({			\
-	unsigned char bar;				\
-	bar = ((type_t*) member;			\
-});
 
 /* bool ac3(struct _csp *csp) */
 /* { */
@@ -18,7 +12,7 @@
 /* } */
 
 struct _csp *backtrack(struct _csp *assignments, struct _csp *csp,
-		       bool(*constraint_check)(void *,void *,struct _csp *),
+		       bool(*constraint_check)(DOMAIN,CONSTRAINT,struct _csp *),
 			int variable_count, int curr_index)
 {
 	
@@ -31,7 +25,7 @@ struct _csp *backtrack(struct _csp *assignments, struct _csp *csp,
 				     assignments)) {
 			
 			csp[curr_index].value = csp[curr_index].domain[i];
-
+			
 			struct _csp value = {
 				.variable = csp[curr_index].variable,
 				.value = csp[curr_index].domain[i]
