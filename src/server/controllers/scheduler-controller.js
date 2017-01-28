@@ -1,6 +1,4 @@
 var db = require('../config/database');
-var mailer = require('nodemailer');
-var error = require('./error');
 var fs = require('fs');
 var jwt = require('jsonwebtoken');
 

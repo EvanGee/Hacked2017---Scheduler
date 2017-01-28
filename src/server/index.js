@@ -37,11 +37,10 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(flash());
 
 var routes = require('./routes/web');
 
-require('./config/passport')(app, passport);
+//require('./config/passport')(app, passport);
 
 
 server.listen(3000, () => {
