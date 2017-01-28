@@ -11,7 +11,7 @@ void parseShiftFile(char *filename, struct Shift *shifts){
         double end = atof(strtok(NULL, " "));
         int num = atoi(strtok(NULL, " "));
 	
-	shifts[i].constraints = calloc(sizeof(struct Shift), num);
+	shifts[i].constraints = calloc(sizeof(struct Shift *), num);
 
         for(int j = 0; j < num; j++){
             shifts[i].id = i+1;
@@ -38,7 +38,7 @@ void parseShiftFile(char *filename, struct Shift *shifts){
 	// circular buffer of a cross section of array
 	for (int j = subtractor; j < i; j++) {
 		for (int k = 1; k < num; k++) {
-			shifts[j].constraints[k-1] = shifts[((j + k) % i) % num + i];
+			shifts[j].constraints[k-1] = &shifts[((j + k) % i) % num + i];
 		}
 	}
 

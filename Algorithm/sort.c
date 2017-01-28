@@ -4,15 +4,10 @@
 #include <stdbool.h>
 
 #include "sort.h"
-//#include "shifts.h"
 
-/* bool ac3(struct _csp *csp) */
-/* { */
-	
-/* } */
 
 struct _csp *backtrack(struct _csp *assignments, struct _csp *csp,
-		       bool(*constraint_check)(DOMAIN,CONSTRAINT,struct _csp *),
+		       bool(*constraint_check)(DOMAIN *, CONSTRAINT *),
 			int variable_count, int curr_index)
 {
 	
@@ -20,9 +15,8 @@ struct _csp *backtrack(struct _csp *assignments, struct _csp *csp,
 		return assignments;
 	
 	for (int i = 0; i < csp[curr_index].domain_len; i++) {
-		if (constraint_check(csp[curr_index].domain[i],
-				     csp[curr_index].variable,
-				     assignments)) {
+		if (constraint_check(&csp[curr_index].domain[i],
+				     &csp[curr_index].variable)) {
 			
 			csp[curr_index].value = csp[curr_index].domain[i];
 			
@@ -30,8 +24,11 @@ struct _csp *backtrack(struct _csp *assignments, struct _csp *csp,
 				.variable = csp[curr_index].variable,
 				.value = csp[curr_index].domain[i]
 			};
+
 			
 			assignments[curr_index] = value;
+			csp[curr_index].domain[i].allocated_hours +=
+				(csp[curr_index].variable.end - csp[curr_index].variable.start);
 			
 			// check arc consistency here
 			
@@ -39,6 +36,9 @@ struct _csp *backtrack(struct _csp *assignments, struct _csp *csp,
 			result = backtrack(assignments, csp, constraint_check,
 					   0, curr_index);
 
+			csp[curr_index].domain[i].allocated_hours -=
+				(csp[curr_index].variable.end - csp[curr_index].variable.start);
+			
 			if (result)
 				return result;
 			

@@ -5,14 +5,6 @@
 #include "shifts.h"
 #include "people.h"
 
-/* #ifndef DOMAIN */
-/* #define DOMAIN void * */
-/* #endif */
-
-/* #ifndef CONSTRAINT */
-/* #define CONSTRAINT void * */
-/* #endif */
-
 #ifndef MAX_CONSTRAINT
 #define MAX_CONSTRAINT 1024
 #endif
@@ -26,9 +18,9 @@
 struct _csp {
 	VARIABLE variable;
 	int constraint_len;
-        CONSTRAINT constraints[MAX_CONSTRAINT];
+        CONSTRAINT **constraints;
 	int domain_len;
-	DOMAIN domain[MAX_DOMAIN];
+	DOMAIN *domain;
 
 	DOMAIN value;
 };
@@ -39,7 +31,7 @@ bool ac3(struct _csp *csp);
 bool complete(struct _csp *assignment, struct _csp *csp, int var_count);
 
 struct _csp *backtrack(struct _csp *assignment, struct _csp *csp,
-		       bool(*constraint_check)(DOMAIN, VARIABLE, struct _csp *),
+		       bool(*constraint_check)(DOMAIN *, VARIABLE *),
 		       int variable_count, int assignment_index);
 
 void order_domain_values(struct _csp *csp, int var_count,

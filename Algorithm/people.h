@@ -10,7 +10,7 @@ struct person {
 	double start_times[7];
 	double end_times[7];
 	double max_hours;
-	int hours_allocated;
+	int allocated_hours;
 };
 
 

@@ -13,7 +13,8 @@ struct Shift{
 	float start;
 	float end;
 	int n_constraints;
-	struct Shift *constraints;
+	struct Shift **constraints;
+	struct person *value;
 };
 
 void parseShiftFile(char *filename, struct Shift *shifts);
