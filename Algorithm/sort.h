@@ -2,9 +2,12 @@
 struct _csp {
 	void *variable;
 	int constraint_len;
-	void *constraint[];
+	void *constraints[];
 	int domain_len;
 	void *domain[];
+
+	void *value;
+	
 	struct _csp *next;
 	struct _csp *back;
 };

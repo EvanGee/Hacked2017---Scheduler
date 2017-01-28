@@ -17,51 +17,44 @@ bool ac3(struct _csp *csp)
 	
 }
 
-struct _csp **backtrack(struct _csp **assignment, struct _csp **csp,
-			bool(*constraint_check)((struct _csp *),(struct _csp **)))
+struct _csp *backtrack(struct _csp *assignments, struct _csp *csp,
+			bool(*constraint_check)((struct _csp),(struct _csp *)),
+			int variable_count, int assignment_index)
 {
-	
-	bool flag = false;
-	
-	if (complete(assignment, csp)) { // made this function above
-		return assignment;
+	if (variable_count != 0) {
+		assignments = calloc(sizeof(struct _csp *), variable_count);
+	}
+       	
+	if (complete(assignments, csp)) { // this function
+		return assignments;
 	}
 	
-	struct _csp *variable = (*csp)->variable;
-	for (int i = 0; i < (*csp)->domain_len; i++) {
-		if (constraint_check(variable, assignment)) { 
+	// struct _csp *variable = csp->variable;
+	for (int i = 0; i < csp->domain_len; i++) {
+		if (constraint_check(csp->domain[i], assignments)) {
 			
 			flagged = false;
-			// malloc assignment
-			// add variable to assignment
-			// check arc consistency here 
+			csp->value = csp->domain[i];
+			
+			assignments[curr_index] = {
+				.variable = csp->variable,
+				.value = csp->domain[i]
+			};
+			
+			// check arc consistency here
+			
+			struct _csp *result;
+			result = backtrack(assignments, csp->next, eval, 0, ++current_index);
+
+			if (result)
+				return result;
 			
 		}
-		else {
-			flagged = true;
-		}
+		
+		// remove value from domain
+		remove(csp, csp->domain[i]); // this function
 	}
-	
-	(*csp) = (*csp)->next;
-	struct _csp *result;
-	
-	if (!flagged) {
-		result = backtrack(assignment, csp, eval);
-	}
-
-}
-
-
-void order_domain_values(struct _csp *csp, int var_count,
-			 bool(*eval)((struct _csp **),(struct _csp **)))
-{
-
-	// use q_sort
-};
-
-struct _csp *select_unassigned_var(struct _csp **csp, struct _csp **assignment)
-{
-
+	return NULL;
 }
 
 bool complete(struct _csp **assignment, struct _csp **csp, int var_count) 
@@ -72,3 +65,17 @@ bool complete(struct _csp **assignment, struct _csp **csp, int var_count)
 	}
 	return true;
 }
+
+
+
+/* void order_domain_values(struct _csp *csp, int var_count, */
+/* 			 bool(*eval)((struct _csp **),(struct _csp **))) */
+/* { */
+
+/* 	// use q_sort */
+/* }; */
+
+/* struct _csp *select_unassigned_var(struct _csp **csp, struct _csp **assignment) */
+/* { */
+
+/* } */
