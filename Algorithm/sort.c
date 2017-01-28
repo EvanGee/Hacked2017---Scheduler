@@ -4,8 +4,9 @@
 #include <stdbool.h>
 
 #include "sort.h"
-#include "parser.h"
-#include "check.h"
+#include "people.h"
+//#include "shifts.h"
+//#include "check.h"
 
 #define CAST_TO(type_t, member) ({			\
 	unsigned char bar;				\
@@ -18,14 +19,14 @@ bool ac3(struct _csp *csp)
 }
 
 struct _csp *backtrack(struct _csp *assignments, struct _csp *csp,
-		       bool(*constraint_check)((void *),(void *),(struct _csp *)),
-			int variable_count, int assignment_index)
+		       bool(*constraint_check)(void *,void *,struct _csp *),
+			int variable_count, int curr_index)
 {
 	if (variable_count != 0) {
 		assignments = calloc(sizeof(struct _csp *), variable_count);
 	}
        	
-	if (complete(assignments, csp)) { // can do better !!
+	if (complete(assignments, csp, 10 /* change later please*/)) { // can do better !!
 		return assignments;
 	}
 	
@@ -33,18 +34,20 @@ struct _csp *backtrack(struct _csp *assignments, struct _csp *csp,
 	for (int i = 0; i < csp->domain_len; i++) {
 		if (constraint_check(csp->domain[i], csp->variable, assignments)) {
 			
-			flagged = false;
 			csp->value = csp->domain[i];
-			
-			assignments[curr_index] = {
+
+			struct _csp value = {
 				.variable = csp->variable,
 				.value = csp->domain[i]
 			};
 			
+			assignments[curr_index] = value;
+			
 			// check arc consistency here
 			
 			struct _csp *result;
-			result = backtrack(assignments, csp->next, eval, 0, ++current_index);
+			result = backtrack(assignments, csp->next, constraint_check,
+					   0, ++curr_index);
 
 			if (result)
 				return result;
@@ -57,20 +60,20 @@ struct _csp *backtrack(struct _csp *assignments, struct _csp *csp,
 	return NULL;
 }
 
-void remove(struct _csp *csp, void *domain) {
+/* void remove(struct _csp *csp, void *domain) { */
 
-	int i;
-	for (i = 0; csp->domain[i] != domain; i++);
-	csp->domain[i] = NULL;
+/* 	int i; */
+/* 	for (i = 0; csp->domain[i] != domain; i++); */
+/* 	csp->domain[i] = NULL; */
 	
-}
+/* } */
 
-bool complete(struct _csp **assignment, struct _csp **csp, int var_count) 
+bool complete(struct _csp *assignment, struct _csp *csp, int var_count) 
 {
-	for (int i = 0; i < var_count; i++) {
-		if (!assignment[i]) 
-			return false;
-	}
+	/* for (int i = 0; i < var_count; i++) { */
+	/* 	if (assignment[i] == NULL)  */
+	/* 		return false; */
+	/* } */
 	return true;
 }
 

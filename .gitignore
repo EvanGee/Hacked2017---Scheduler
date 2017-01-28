@@ -41,3 +41,9 @@ jspm_packages
 build
 typings
 .env
+
+
+# C stuff
+
+*.o
+*~
