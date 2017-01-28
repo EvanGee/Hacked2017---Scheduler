@@ -1,3 +1,4 @@
+#define MAX_PEOPLE    1024
 
 struct person {
 
@@ -8,6 +9,8 @@ struct person {
 	double max_hours;
 	int hours_allocated;
 };
+
+
 
 void traverse_people(struct person *people);
 

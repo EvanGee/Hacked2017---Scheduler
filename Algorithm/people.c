@@ -4,7 +4,6 @@
 
 #include "people.h"
 
-#define MAX_PEOPLE    1024
 #define MAX_LINE      1024
 #define DAYS_OF_WEEK  7
 
