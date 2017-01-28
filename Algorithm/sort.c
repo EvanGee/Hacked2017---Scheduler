@@ -18,20 +18,20 @@ bool ac3(struct _csp *csp)
 }
 
 struct _csp *backtrack(struct _csp *assignments, struct _csp *csp,
-			bool(*constraint_check)((struct _csp),(struct _csp *)),
+		       bool(*constraint_check)((void *),(void *),(struct _csp *)),
 			int variable_count, int assignment_index)
 {
 	if (variable_count != 0) {
 		assignments = calloc(sizeof(struct _csp *), variable_count);
 	}
        	
-	if (complete(assignments, csp)) { // this function
+	if (complete(assignments, csp)) { // can do better !!
 		return assignments;
 	}
 	
 	// struct _csp *variable = csp->variable;
 	for (int i = 0; i < csp->domain_len; i++) {
-		if (constraint_check(csp->domain[i], assignments)) {
+		if (constraint_check(csp->domain[i], csp->variable, assignments)) {
 			
 			flagged = false;
 			csp->value = csp->domain[i];
@@ -52,9 +52,17 @@ struct _csp *backtrack(struct _csp *assignments, struct _csp *csp,
 		}
 		
 		// remove value from domain
-		remove(csp, csp->domain[i]); // this function
+		//remove(csp, csp->domain[i]); // don't need because we are not removing anything
 	}
 	return NULL;
+}
+
+void remove(struct _csp *csp, void *domain) {
+
+	int i;
+	for (i = 0; csp->domain[i] != domain; i++);
+	csp->domain[i] = NULL;
+	
 }
 
 bool complete(struct _csp **assignment, struct _csp **csp, int var_count) 
