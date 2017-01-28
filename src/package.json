@@ -53,11 +53,7 @@
     "whatwg-fetch": "1.0.0"
   },
   "dependencies": {
-    "dayz": "^0.6.5",
     "express": "^4.14.0",
-    "moment": "^2.17.1",
-    "moment-range": "^3.0.0",
-    "node-mysql": "^0.4.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "socket.io": "^1.7.2"
