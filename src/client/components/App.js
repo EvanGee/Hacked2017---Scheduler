@@ -26,16 +26,14 @@ class App extends Component {
     return (
       
       <div>
-      <Calender />
-      <MuiThemeProvider>
-          <MyAwesomeReactComponent />   
-      </MuiThemeProvider>
-      <MuiThemeProvider>
-          <TimePicker /> 
-      </MuiThemeProvider>
-
-      <ServeBtn socket={socket}/>
+        <Calender />
+        <ServeBtn socket={socket}/>
       </div>
     );
   }
 }
+
+/*     <MuiThemeProvider>
+          <TimePicker /> 
+      </MuiThemeProvider>
+      */

@@ -1,35 +1,61 @@
 var React = require('react');
+
+
+var clicked = false;
 var day = React.createClass({
 
     getInitialState: function () {
-        return { color: "blue"};
+        return { color: "blue",
+                clicked: false};
     },
 
     onMouseOver : function (e) {
-         this.setState({
-            color: "red"
-        });
+        if(clicked) {
+            this.setState({
+                color: "red",
+                clicked: true
+            });
+        } else {
+            this.setState({
+                color: "lightblue"
+            });
+
+        }
+    },
+    onMouseOut : function (e) {
+        if(this.state.clicked === false) {
+            this.setState({
+                color: "blue",
+            });
+
+        } else if (this.state.clicked === true){
+            this.setState({
+                color: "red",
+            });
+
+        }
+    },
+    onClick : function () {
+        if (clicked) 
+            clicked = false;
+        else 
+            clicked = true;
 
     },
-
-    onClick : function (e) {
-        
-        this.setState({background : "red"});
-        console.log(this.state.background);
-
-    },
-
 
     render: function () {
         return (
                 <td style={{background:this.state.color}}
-                    onMouseOver={this.onMouseOver}>
+                    onMouseOver={this.onMouseOver}
+                    onMouseOut={this.onMouseOut}
+                    onClick={this.onClick}>
                     {this.props.data}
+                    {this.props.date}
                 </td>
+
 
         );
     }
-
 });
 
 module.exports = day;
