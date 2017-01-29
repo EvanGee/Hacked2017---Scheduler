@@ -5,7 +5,7 @@ import io from 'socket.io-client/dist/socket.io.min.js'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import MyAwesomeReactComponent from './MyAwesomeReactComponent';
 import  TimePicker from "./TimePicker";
-//import injectTapEventPlugin from 'react-tap-event-plugin';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 
 var socket = io.connect();
@@ -17,6 +17,9 @@ export default
 
 
 class App extends Component {
+  componentWillMount() {
+    injectTapEventPlugin();
+  }
 
   render() {
 
@@ -25,8 +28,12 @@ class App extends Component {
       <div>
       <Calender />
       <MuiThemeProvider>
-          <MyAwesomeReactComponent />
+          <MyAwesomeReactComponent />   
       </MuiThemeProvider>
+      <MuiThemeProvider>
+          <TimePicker /> 
+      </MuiThemeProvider>
+
       <ServeBtn socket={socket}/>
       </div>
     );
