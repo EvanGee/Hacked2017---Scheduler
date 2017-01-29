@@ -13,6 +13,7 @@ var  handleChange = function (set){
 }
 
 var sendData = function (){
+  
   console.log(dataSet);
 
 }
