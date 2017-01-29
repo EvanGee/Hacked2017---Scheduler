@@ -23,6 +23,7 @@ void read_and_parse(char *filename, struct person *people)
 	while (fgets(line, MAX_LINE, fp)) {
 
 		strtok(line, "\n");
+        /*
 		struct person p = {
 			.name =      strtok(line, " "),
 			.level =     atoi(strtok(NULL, " ")),
@@ -30,7 +31,13 @@ void read_and_parse(char *filename, struct person *people)
 			.hours_allocated = 0
 		};
 		people[insert] = p;
-		
+        */
+
+        strcpy(people[insert].name, strtok(line, " "));
+        people[insert].level = atoi(strtok(NULL, " "));
+        people[insert].max_hours = atof(strtok(NULL, " "));
+		people[insert].hours_allocated = 0;
+
 		char availability[MAX_LINE];
 		for (int i = 0; i < DAYS_OF_WEEK; i++) {
 			fgets(availability, MAX_LINE, fp);
@@ -38,14 +45,14 @@ void read_and_parse(char *filename, struct person *people)
 			people[insert].start_times[i] = atof(strtok(availability, " "));
 			people[insert].end_times[i] = atof(strtok(NULL, " "));
 		}
-		people[++insert].name = '\0';
+		people[++insert].name[0] = '\0';
 		traverse_people(people);
 	}
 }
 
 void traverse_people(struct person *people) {
 
-	for (int i = 0; people[i].name != '\0' ; i++) {
+	for (int i = 0; people[i].name[0] != '\0' ; i++) {
 		printf ("Name: %s\nlevel: %d\nRequested Hours: %f\n", people[i].name,
 			people[i].level, people[i].max_hours);
 		for (int j = 0; j < DAYS_OF_WEEK; j++) 
