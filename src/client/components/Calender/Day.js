@@ -1,24 +1,25 @@
 var React = require('react');
 
-
+var color = "0xC6C6C6";
+var color2 = "lightblue"
 var clicked = false;
 var day = React.createClass({
 
     getInitialState: function () {
-        return { color: "blue",
+        return { color: color,
                 clicked: false};
     },
 
     onMouseOver : function (e) {
         if(clicked) {
             this.setState({
-                color: "red",
+                color: color2,
                 clicked: true
             });
             
         } else {
             this.setState({
-                color: "lightblue"
+                color: color
             });
         }
         
@@ -26,12 +27,12 @@ var day = React.createClass({
     onMouseOut : function (e) {
         if(this.state.clicked === false) {
             this.setState({
-                color: "blue",
+                color: color,
             });
 
         } else if (this.state.clicked === true){
             this.setState({
-                color: "red",
+                color: color2,
             });
             this.handleChange();
         }
@@ -45,7 +46,7 @@ var day = React.createClass({
     },
 
     handleChange : function () {
-        if(this.state.color === "red")
+        if(this.state.color === color2)
             this.props.handler([this.props.date, this.props.data]);
     },
 
@@ -56,7 +57,6 @@ var day = React.createClass({
                     onMouseOut={this.onMouseOut}
                     onClick={this.onClick}>
                     {this.props.data}
-                    {this.props.date}
                 </td>
 
 

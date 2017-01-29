@@ -6,7 +6,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import  TimePicker from "./TimePicker";
 
 
-//var socket = io.connect();
+var socket = io.connect();
 var Calender = require('./Calender/Calender');
 //var ServeBtn = require('./ServeBtn')
 
@@ -17,7 +17,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Calender />
+        <Calender socket={socket}/>
       </div>
     );
   }

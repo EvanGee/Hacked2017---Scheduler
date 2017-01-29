@@ -14,7 +14,7 @@ export default React.createClass({
                 <LogInView /> 
             </MuiThemeProvider>
             <MuiThemeProvider>
-                <Link to="Calender">
+                <Link to="calender" rendered="yes">
                     <Button name="login" className= "LogButton"/>
                 </Link>
             </MuiThemeProvider>

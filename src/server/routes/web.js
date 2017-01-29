@@ -32,7 +32,6 @@ router.get('/calendar/:id', function(req, res) {
     res.render('calendar', {data: req.data});
 });
 
-
 router.get('/calendar/add_shift', function(req, res) {
     res.render('add-shift', {data: {}});
 });

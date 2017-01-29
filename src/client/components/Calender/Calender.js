@@ -12,33 +12,30 @@ var  handleChange = function (set){
     dataSet = set;
 }
 
-var sendData = function (){
-  
-  console.log(dataSet);
-
-}
 
 var Calender = React.createClass({
   send: function (e) {
-    console.log(Data);
+    console.log(dataSet);
+    //this.props.socket.emit("send", dataSet);
   },
   
   render: function () {
 
     return (
       <div>
+      
       <table>
         {WeekDays.map(function (d) {
           return <DayName day={d} /> ;
       })}
-
+      
         {Data.map(function (d) {
             return (
                 <Row data={d} hand={handleChange}/>
               );
         })}
       </table>
-      <button onClick={sendData}> SEND </button>
+      <button onClick={this.send}> SEND </button>
       </div>
     );
   }

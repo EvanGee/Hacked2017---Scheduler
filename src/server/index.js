@@ -20,6 +20,19 @@ io.on('connection', function(socket){
 
      socket.on("send", function(message) {
         console.log(message);
+
+        fs.open('dataFile.csv', 'wx', (err, fd) => {
+        if (err) {
+            if (err.code === "EEXIST") {
+                console.error('myfile already exists');
+                return;
+            } else {
+                throw err;
+            }
+        }
+        writeMyData(fd);
+        });
+
     	//socket.broadcast.emit("message", message);
     });
 });

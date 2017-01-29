@@ -12,9 +12,7 @@ var ServeBtn = React.createClass({
 
     render: function () {
         return (
-            
             <button onClick = {this.sendToServer}></button>
-
         );
     }
 
