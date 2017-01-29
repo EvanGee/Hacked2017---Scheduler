@@ -6,7 +6,7 @@ var header = React.createClass({
   render: function () {
 
     return (
-        <th>
+        <th style={{background:"green"}}>
           {this.props.day}
         </th>
     );
