@@ -27,10 +27,6 @@ var Calender = React.createClass({
     );
   }
 
-
-
-
-
 });
 
 module.exports = Calender;
