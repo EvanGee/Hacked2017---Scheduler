@@ -8,13 +8,12 @@ import  TimePicker from "./TimePicker";
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 
+
 var socket = io.connect();
 var Calender = require('./Calender/Calender');
 var ServeBtn = require('./ServeBtn')
 
 export default
-
-
 
 class App extends Component {
   componentWillMount() {
