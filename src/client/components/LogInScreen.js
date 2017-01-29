@@ -1,31 +1,17 @@
-import React from 'react';
-import TextField from 'material-ui/TextField';
-
-export default class TextFieldExampleControlled extends React.Component {
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      value: 'Property Value',
-    };
-  }
-
-  handleChange = (event) => {
-    this.setState({
-      value: event.target.value,
-    });
-  };
-
+import React from 'react'
+import {Link} from "react-router"
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import LogInView from './LogInView';
+export default React.createClass({
   render() {
     return (
-      <div>
-        <TextField
-          id="text-field-controlled"
-          value={this.state.value}
-          onChange={this.handleChange}
-        />
-      </div>
-    );
+        <div>
+            <MuiThemeProvider>
+                <LogInView /> 
+            </MuiThemeProvider>
+            <h1>Some H1</h1>
+            <Link to="Calender">to App</Link>
+        </div>
+    )
   }
-}
+})
