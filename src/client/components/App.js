@@ -1,19 +1,33 @@
 import React, { Component } from 'react';
 import logo from './../logo.svg';
 import './App.scss';
+import io from 'socket.io-client/dist/socket.io.min.js'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MyAwesomeReactComponent from './MyAwesomeReactComponent';
+import  TimePicker from "./TimePicker";
+//import injectTapEventPlugin from 'react-tap-event-plugin';
+
+
+var socket = io.connect();
+var Calender = require('./Calender/Calender');
+var ServeBtn = require('./ServeBtn')
 
 export default
+
+
+
 class App extends Component {
+
   render() {
+
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      
+      <div>
+      <Calender />
+      <MuiThemeProvider>
+          <MyAwesomeReactComponent />
+      </MuiThemeProvider>
+      <ServeBtn socket={socket}/>
       </div>
     );
   }

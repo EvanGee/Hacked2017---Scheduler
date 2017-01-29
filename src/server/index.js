@@ -7,8 +7,22 @@ var path = require("path");
 
 app.use(express.static(path.join(__dirname, "../build")));
 
-io.on('connection', function(){ 
+io.on('connection', function(socket){
+    
     console.log("hello");
+
+     socket.on("send", function(message) {
+        console.log(message);
+    	//socket.broadcast.emit("message", message);
+    });
+
+
+
+
+
+
+
+
 });
 server.listen(3000, () => {
 	console.log("Starting Socket App - http://localhost:3000");
