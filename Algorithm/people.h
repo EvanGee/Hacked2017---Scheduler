@@ -1,7 +1,7 @@
 
 struct person {
 
-	char *name;
+	char name[1024];
 	int level;
 	double start_times[7];
 	double end_times[7];
