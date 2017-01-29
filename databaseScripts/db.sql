@@ -1,19 +1,29 @@
-DROP TABLE IF EXISTS users;
-
-DROP TABLE IF EXISTS  shifts;
-
-DROP TABLE IF EXISTS  shiftPeriod;
-
-DROP DATABASE IF EXISTS  SCHEDULER;
 
 CREATE DATABASE IF NOT EXISTS SCHEDULER;
+USE SCHEDULER;
 
-USE SCHEDULER
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS  shifts;
+DROP TABLE IF EXISTS  shiftPeriod;
 
 CREATE TABLE IF NOT EXISTS users (
-    ID int NOT NULL AUTO_INCREMENT,
-    Name char NOT NULL,
-    lelve int not NULL,
+    ID INT NOT NULL AUTO_INCREMENT,
+    Name CHAR NOT NULL,
+    level INT not NULL,
+
+    PRIMARY KEY (ID)
+);
+
+CREATE TABLE IF NOT EXISTS shiftPeriod(
+    ID int not NULL AUTO_INCREMENT,
+    PRIMARY KEY (ID)
+);
+
+CREATE TABLE IF NOT EXISTS availability (
+
+    ID INT NOT NULL AUTO_INCREMENT,
+    
+
     MondayStart REAL(3,1),
     MondayEnd REAL(3,1),
     TuesdayStart REAL(3,1),
@@ -28,20 +38,29 @@ CREATE TABLE IF NOT EXISTS users (
     SaturdayEnd REAL(3,1),
     SundayStart REAL(3,1),
     SundayEnd REAL(3,1),
-    PRIMARY KEY (ID)
+
+    PeriodId INT NOT NULL,
+    UserId INT NOT NULL,
+
+    CONSTRAINT user_period UNIQUE (PeriodId, UserId),
+    
+    FOREIGN KEY (PeriodId) REFERENCES shiftPeriod (ID)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+
+    FOREIGN KEY (UserId) REFERENCES users (ID)
+    ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS shifts(
     ID int not NULL AUTO_INCREMENT,
     Day char(2),
-    TimeStart float,
-    TimeEnd float,
+    TimeStart REAL(3,1),
+    TimeEnd REAL(3,1),
+    PeriodId INT NOT NULL,
+
+    FOREIGN KEY (PeriodId) REFERENCES shiftPeriod (ID)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+
     PRIMARY KEY (ID)
 );
-
-create TABLE IF NOT EXISTS shiftPeriod(
-    ID int not NULL AUTO_INCREMENT,
-    PRIMARY KEY (ID)
-);
-
 
