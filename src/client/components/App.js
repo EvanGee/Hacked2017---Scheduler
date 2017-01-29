@@ -7,8 +7,6 @@ import MyAwesomeReactComponent from './MyAwesomeReactComponent';
 import  TimePicker from "./TimePicker";
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-
-
 var socket = io.connect();
 var Calender = require('./Calender/Calender');
 var ServeBtn = require('./ServeBtn')
@@ -22,8 +20,6 @@ class App extends Component {
 
   render() {
     return (
-
-      
       <div>
         <Calender />
         <ServeBtn socket={socket}/>

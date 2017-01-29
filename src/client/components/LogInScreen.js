@@ -1,13 +1,31 @@
-import React from 'react'
-import {Link} from "react-router"
+import React from 'react';
+import TextField from 'material-ui/TextField';
 
-export default React.createClass({
-  render() {
-    return <div>About
+export default class TextFieldExampleControlled extends React.Component {
 
-        <h1>Some H1</h1>
+  constructor(props) {
+    super(props);
 
-        <Link to="Calender">to App</Link>
-    </div>
+    this.state = {
+      value: 'Property Value',
+    };
   }
-})
+
+  handleChange = (event) => {
+    this.setState({
+      value: event.target.value,
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <TextField
+          id="text-field-controlled"
+          value={this.state.value}
+          onChange={this.handleChange}
+        />
+      </div>
+    );
+  }
+}
