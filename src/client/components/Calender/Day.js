@@ -15,12 +15,13 @@ var day = React.createClass({
                 color: "red",
                 clicked: true
             });
+            
         } else {
             this.setState({
                 color: "lightblue"
             });
-
         }
+        
     },
     onMouseOut : function (e) {
         if(this.state.clicked === false) {
@@ -32,7 +33,7 @@ var day = React.createClass({
             this.setState({
                 color: "red",
             });
-
+            this.handleChange();
         }
     },
     onClick : function () {
@@ -41,6 +42,11 @@ var day = React.createClass({
         else 
             clicked = true;
 
+    },
+
+    handleChange : function () {
+        if(this.state.color === "red")
+            this.props.handler([this.props.date, this.props.data]);
     },
 
     render: function () {
