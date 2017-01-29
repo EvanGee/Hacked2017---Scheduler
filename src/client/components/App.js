@@ -4,8 +4,9 @@ import './App.scss';
 import io from 'socket.io-client/dist/socket.io.min.js'
 
 var socket = io.connect();
-var Calender = require('./Calender');
+var Calender = require('./Calender/Calender');
 var ServeBtn = require('./ServeBtn')
+var TimePicker = require('./TimePicker');
 export default
 
 
@@ -15,6 +16,7 @@ class App extends Component {
     return (
       <div>
           <Calender />
+
           <ServeBtn socket={socket}/>
       </div>
     );
