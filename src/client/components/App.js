@@ -3,7 +3,6 @@ import logo from './../logo.svg';
 import './App.scss';
 import io from 'socket.io-client/dist/socket.io.min.js'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import MyAwesomeReactComponent from './MyAwesomeReactComponent';
 import  TimePicker from "./TimePicker";
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
