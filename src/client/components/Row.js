@@ -2,8 +2,6 @@ var React = require('react');
 var Day = require('./Day');
 
 
-
-
 var Row = React.createClass({
     getInitialState: function () {
         return { row: []};

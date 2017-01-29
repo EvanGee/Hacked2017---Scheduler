@@ -1,37 +1,32 @@
 var React = require('react');
-
-
 var day = React.createClass({
 
     getInitialState: function () {
-        return { selection: [],
-                 style: {}};
-    },
-
-    onMouseDown : function (e) {
-        console.log(this.props.data)
-        this.onMouseOver();
+        return { color: "blue"};
     },
 
     onMouseOver : function (e) {
-        console.log(this.props.data)
+         this.setState({
+            color: "red"
+        });
 
     },
 
     onClick : function (e) {
-        this.state.style.background = "red";
-        console.log(this.state.style.background);
-        this.render();
+        
+        this.setState({background : "red"});
+        console.log(this.state.background);
+
     },
+
 
     render: function () {
         return (
-                <td onMouseOver={this.onMouseOver} 
-                onMouseDown={this.onMouseDown} 
-                onClick = {this.onClick}
-                style = {this.state.style}>
+                <td style={{background:this.state.color}}
+                    onMouseOver={this.onMouseOver}>
                     {this.props.data}
                 </td>
+
         );
     }
 

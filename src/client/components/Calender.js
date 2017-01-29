@@ -10,10 +10,13 @@ var Calender = React.createClass({
   render: function () {
 
     return (
+
       <table>
         {WeekDays.map(function (d) {
           return <DayName className="tableColumn" day={d} /> ;
       })}
+      
+      
         {Data.map(function (d) {
             return (
                 <Row className="" data={d} />
